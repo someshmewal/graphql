@@ -1,0 +1,5 @@
+
+1996Somesh@@
+
+
+26. Implement a basic authentication mechanism (e.g., JWT or session-based) in Node.js and Write a program that uses streams to read and write large files efficiently.

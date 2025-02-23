@@ -1,0 +1,48 @@
+
+services:
+  # User Service
+  user:
+    build:
+      context: ./services/user-service/
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    volumes:
+      - commonfiles:/src/commonfiles
+    env_file:
+      - .env
+
+  # Product Service
+  product:
+    build:
+      context: ./services/product/
+    ports:
+      - "4001:4001"
+    networks:
+      - app-network
+    volumes:
+      - commonfiles:/src/commonfiles
+    env_file:
+      - .env
+
+  mainserver:
+      build:
+        context: ./
+      ports:
+        - "8080:8080"
+      env_file:
+        - .env
+      volumes:
+        - commonfiles:/app/commonfiles
+      depends_on:
+        - user
+        - product
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  commonfiles:
+    driver: local
